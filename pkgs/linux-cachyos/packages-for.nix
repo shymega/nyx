@@ -119,6 +119,9 @@ let
             repo = "zfs";
             inherit (versions.zfs) rev hash;
           };
+          configureFlags = (prevAttrs.configureFlags or []) ++ [
+            "--with-vendor=nixos"
+          ];
           postPatch = builtins.replaceStrings [ "grep --quiet '^Linux-M" ] [ "# " ] prevAttrs.postPatch;
         });
     inherit cachyOverride;
